@@ -7,17 +7,15 @@ import "leaflet/dist/leaflet.css";
 const POLL_INTERVAL_MS = 5000; // Refresh interval
 const CO2_THRESHOLDS = { good: 450, warn: 800 };
 
+// Define base values for each point according to location type
 const SENSOR_POINTS = [
-  { id: 1,  name: "Point 1",  lat: 48.1353, lng: 11.5614 },
-  { id: 2,  name: "Point 2",  lat: 48.1255, lng: 11.5496 },
-  { id: 3,  name: "Point 3",  lat: 48.1559, lng: 11.4935 },
-  { id: 4,  name: "Point 4",  lat: 48.1485, lng: 11.5705 },
-  { id: 5,  name: "Point 5",  lat: 48.1400, lng: 11.5900 },
-  { id: 6,  name: "Point 6",  lat: 48.1600, lng: 11.5800 },
-  { id: 7,  name: "Point 7",  lat: 48.1500, lng: 11.5500 },
-  { id: 8,  name: "Point 8",  lat: 48.1700, lng: 11.5700 },
-  { id: 9,  name: "Point 9",  lat: 48.1350, lng: 11.5700 },
-  { id: 10, name: "Point 10", lat: 48.1450, lng: 11.5650 },
+  { id: 1,  name: "Eva'shome", lat: 48.1353, lng: 11.5614, base: { co2: 700, temp: 23, hum: 60 } },
+  { id: 2,  name: "Poccistrasse", lat: 48.1255, lng: 11.5496, base: { co2: 500, temp: 23, hum: 60 } },
+  { id: 3,  name: "Schloss Nymphenburg", lat: 48.1559, lng: 11.4935, base: { co2: 370, temp: 20, hum: 65 } },
+  { id: 4,  name: "Pinakothek", lat: 48.1485, lng: 11.5701, base: { co2: 450, temp: 21, hum: 50 } },
+  { id: 5,  name: "OlympiaPark",    lat: 48.1758, lng: 11.5519, base: { co2: 400, temp: 22, hum: 70 } },
+  { id: 6,  name: "Chandana's Home",      lat: 48.1826, lng: 11.5183, base: { co2: 800, temp: 23, hum: 54 } },
+  { id: 7,  name: "Luisenstrasse",lat: 48.1505, lng: 11.5665, base: { co2: 400, temp: 20, hum: 52 } },
 ];
 
 // Fix default icon paths
@@ -53,28 +51,32 @@ function colorByCO2(v) {
   return "#cc0000";                               // red
 }
 
-// Generate random values
-const rand = {
-  co2:  () => 300 + Math.random() * 400, // 300–700 ppm
-  temp: () => 15 + Math.random() * 10,    // 15–25 °C
-  hum:  () => 40 + Math.random() * 20,   // 40–60 %
-};
+// Generate small random fluctuation around base value
+function fluctuate(base, range) {
+  return base + (Math.random() - 0.5) * range;
+}
 
 export default function MapPanel() {
   const [points, setPoints] = useState(
-    SENSOR_POINTS.map(p => ({ ...p, co2: null, temperature: null, humidity: null, ts: null }))
+    SENSOR_POINTS.map(p => ({
+      ...p,
+      co2: p.base.co2,
+      temperature: p.base.temp,
+      humidity: p.base.hum,
+      ts: new Date().toISOString()
+    }))
   );
   const timerRef = useRef(null);
 
-  // Refresh all points with random values
+  // Refresh all points with small random fluctuations
   const tick = () => {
     const ts = new Date().toISOString();
     setPoints(prev =>
       prev.map(p => ({
         ...p,
-        co2: rand.co2(),
-        temperature: rand.temp(),
-        humidity: rand.hum(),
+        co2: fluctuate(p.base.co2, 15),         // CO₂ fluctuates ±7.5 ppm
+        temperature: fluctuate(p.base.temp, 1), // Temp fluctuates ±0.5°C
+        humidity: fluctuate(p.base.hum, 3),     // Humidity fluctuates ±1.5%
         ts,
       }))
     );

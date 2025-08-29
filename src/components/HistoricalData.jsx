@@ -38,53 +38,32 @@ const MARKERS = [
   },
   { 
     id: "POINT_4", 
-    label: "Point 4", 
+    label: "Pinakothek", 
     lat: 48.1485, 
-    lng: 11.5705,
-    grafanaUrl: "https://gi3.gis.lrg.tum.de/grafana/d/dashboard4-id/point4-dashboard"
+    lng: 11.5701,
+    grafanaUrl: "https://gi3.gis.lrg.tum.de/grafana/d/ea5e8478-4685-4b57-82ec-3dab2e1fd28d/alte-pinakotheke?orgId=1&from=1756036863443&to=1756040474801"
   },
   { 
     id: "POINT_5", 
-    label: "Point 5", 
-    lat: 48.1400, 
-    lng: 11.5900,
-    grafanaUrl: "https://gi3.gis.lrg.tum.de/grafana/d/dashboard5-id/point5-dashboard"
+    label: "OlympiaPark", 
+    lat: 48.1758, 
+    lng: 11.5519,
+    grafanaUrl: "https://gi3.gis.lrg.tum.de/grafana/d/b91421f3-2561-481b-a55e-d73fe0e222f7/olympia-park?orgId=1&from=1756120169000&to=1756122949000"
   },
   { 
     id: "POINT_6", 
-    label: "Point 6", 
-    lat: 48.1600, 
-    lng: 11.5800,
-    grafanaUrl: "https://gi3.gis.lrg.tum.de/grafana/d/dashboard6-id/point6-dashboard"
+    label: "Chandana's Home", 
+    lat: 48.1826,
+    lng: 11.5183,
+    grafanaUrl: "https://gi3.gis.lrg.tum.de/grafana/d/d595ed38-46ff-4d9d-97ad-cef6e06159eb/chandana-s-home?orgId=1&from=1756071120167&to=1756078608405"
   },
   { 
     id: "POINT_7", 
-    label: "Point 7", 
+    label: "Luisenstrasse", 
     lat: 48.1500, 
     lng: 11.5500,
     grafanaUrl: "https://gi3.gis.lrg.tum.de/grafana/d/dashboard7-id/point7-dashboard"
   },
-  { 
-    id: "POINT_8", 
-    label: "Point 8", 
-    lat: 48.1700, 
-    lng: 11.5700,
-    grafanaUrl: "https://gi3.gis.lrg.tum.de/grafana/d/dashboard8-id/point8-dashboard"
-  },
-  { 
-    id: "POINT_9", 
-    label: "Point 9", 
-    lat: 48.1350, 
-    lng: 11.5700,
-    grafanaUrl: "https://gi3.gis.lrg.tum.de/grafana/d/dashboard9-id/point9-dashboard"
-  },
-  { 
-    id: "POINT_10", 
-    label: "Point 10", 
-    lat: 48.1450, 
-    lng: 11.5650,
-    grafanaUrl: "https://gi3.gis.lrg.tum.de/grafana/d/dashboard10-id/point10-dashboard"
-  }
 ];
 
 function copy(text) {
